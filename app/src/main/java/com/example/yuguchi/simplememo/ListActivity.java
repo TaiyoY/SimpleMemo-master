@@ -163,11 +163,10 @@ public class ListActivity extends AppCompatActivity {
             }
         });
 
-        public void setTextView(String){
-            TextView textView = (TextView) findViewById(R.id.body);
-            textView.setText(value);
-        }
+    }
 
-
+    public void setTextView(String value) {
+        TextView textView = (TextView) findViewById(R.id.body);
+        textView.setText(value);
     }
 }

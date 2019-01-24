@@ -32,8 +32,8 @@ public class CustomDialogFlagment extends DialogFragment {
             }
         });
 
-        // NGボタン作成
-        dialogBuilder.setNegativeButton("NG", new DialogInterface.OnClickListener(){
+        // 戻るボタン作成
+        dialogBuilder.setNegativeButton("戻る", new DialogInterface.OnClickListener(){
 
             @Override
             public void onClick(DialogInterface dialog, int which) {
