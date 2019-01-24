@@ -5,7 +5,8 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.widget.Toast;
+import android.widget.EditText;
+
 
 public class CustomDialogFlagment extends DialogFragment {
     // ダイアログが生成された時に呼ばれるメソッド ※必須
@@ -15,16 +16,19 @@ public class CustomDialogFlagment extends DialogFragment {
         // タイトル設定
         dialogBuilder.setTitle("ダイアログタイトル");
         // 表示する文章設定
-        dialogBuilder.setMessage("ダイアログ本文\n表示されていますか？");
+        dialogBuilder.setMessage("フォルダ名を入力してください");
 
+        //入力フィールド
+        final EditText editText = new EditText(getActivity());
+        dialogBuilder.setView(editText);
         // OKボタン作成
-        dialogBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener(){
-
+        dialogBuilder.setPositiveButton("入力完了", new DialogInterface.OnClickListener(){
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                // トーストを出す
-                Toast toast = Toast.makeText(getActivity(), "OKを押下", Toast.LENGTH_SHORT);
-                toast.show();
+                //editTextの内容を元画面に反映、値取得
+                String returnValue = editText.getText().toString();
+                ListActivity listActivity = (ListActivity) getActivity();
+                listActivity.setTextView(returnValue);
             }
         });
 
