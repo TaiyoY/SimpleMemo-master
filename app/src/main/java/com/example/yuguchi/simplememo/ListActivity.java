@@ -156,17 +156,13 @@ public class ListActivity extends AppCompatActivity {
             @Override
             //クリックでダイヤログ表示
             public void onClick(View v){
-                //ダイヤログインスタンス化
+                Intent intent = new Intent(ListActivity.this,com.example.yuguchi.simplememo.CustomDialogFlagment.class);
+                intent.putExtra("id", "");
+                startActivity(intent);
                 CustomDialogFlagment dialog = new CustomDialogFlagment();
-               //表示
-               dialog.show(getFragmentManager(), "サンプル");
+                dialog.show(getFragmentManager(), "new_folder");
             }
         });
 
-    }
-
-    public void setTextView(String value) {
-        TextView textView = (TextView) findViewById(R.id.body);
-        textView.setText(value);
     }
 }
