@@ -156,9 +156,6 @@ public class ListActivity extends AppCompatActivity {
             @Override
             //クリックでダイヤログ表示
             public void onClick(View v){
-                Intent intent = new Intent(ListActivity.this,com.example.yuguchi.simplememo.CustomDialogFlagment.class);
-                intent.putExtra("id", "");
-                startActivity(intent);
                 CustomDialogFlagment dialog = new CustomDialogFlagment();
                 dialog.show(getFragmentManager(), "new_folder");
             }

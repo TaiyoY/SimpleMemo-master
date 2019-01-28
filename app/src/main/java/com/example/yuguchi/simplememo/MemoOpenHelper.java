@@ -10,14 +10,14 @@ public class MemoOpenHelper extends SQLiteOpenHelper {
     // データベース名
     static final private String DBName = "MEMO_DB";
     // データベースのバージョン(2,3と挙げていくとonUpgradeメソッドが実行される)
-    static final private int VERSION = 2;
+    static final private int VERSION = 3;
 
     // コンストラクタ　以下のように呼ぶこと
     public MemoOpenHelper(Context context) {
         super(context, DBName, null, VERSION);
     }
 
-        // データベースが作成された時に実行される処理
+    // データベースが作成された時に実行される処理
         // データベースはアプリを開いた時に存在しなかったら作成され、すでに存在していれば何もしない
      @Override
      public void onCreate(SQLiteDatabase db) {
