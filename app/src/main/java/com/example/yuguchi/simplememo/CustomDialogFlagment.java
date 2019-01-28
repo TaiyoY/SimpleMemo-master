@@ -40,7 +40,7 @@ public class CustomDialogFlagment extends DialogFragment {
 
                     //データベースから値取得
                     if(helper == null) {
-                        helper = new MemoOpenHelper(ListActivity.this);
+                        helper = new MemoOpenHelper(getActivity());
                     }
 
                     //データベースに保存
