@@ -36,7 +36,7 @@ public class ListActivity extends AppCompatActivity {
         SQLiteDatabase db = helper.getWritableDatabase();
         try {
             // rawQueryというSELECT専用メソッドを使用してデータを取得する
-            Cursor c = db.rawQuery("select uuid, body from MEMO_TABLE order by id", null);
+            Cursor c = db.rawQuery("select uuid, body, parentID, isFolder from MEMO_TABLE order by id", null);
             // Cursorの先頭行があるかどうか確認
             boolean next = c.moveToFirst();
 
@@ -46,6 +46,8 @@ public class ListActivity extends AppCompatActivity {
                 // 取得したカラムの順番(0から始まる)と型を指定してデータを取得する
                 String uuid = c.getString(0);
                 String body = c.getString(1);
+                String parentID = String.valueOf(c.getInt(2));
+                String isFolder = String.valueOf(c.getInt(3));
                 if(body.length() > 10){
                     // リストに表示するのは10文字まで
                     body = body.substring(0, 11) + "...";
@@ -53,6 +55,8 @@ public class ListActivity extends AppCompatActivity {
                 // 引数には、(名前,実際の値)という組合せで指定します　名前はSimpleAdapterの引数で使用します
                 data.put("body",body);
                 data.put("id",uuid);
+                data.put("parentID", parentID);
+                data.put("isFolder", isFolder);
                 memoList.add(data);
                 // 次の行が存在するか確認
                 next = c.moveToNext();
@@ -84,18 +88,24 @@ public class ListActivity extends AppCompatActivity {
              * @param id 選択した項目のID
              */
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                // インテント作成  第二引数にはパッケージ名からの指定で、遷移先クラスを指定
-                Intent intent = new Intent(ListActivity.this,  com.example.yuguchi.simplememo.CreateMemoActivity.class);
+                int isFolder = R.id.isF;
+                if (isFolder == 0) {
+                    // インテント作成  第二引数にはパッケージ名からの指定で、遷移先クラスを指定
+                    Intent intent = new Intent(ListActivity.this, com.example.yuguchi.simplememo.CreateMemoActivity.class);
 
-                // 選択されたビューを取得 TwoLineListItemを取得した後、text2の値を取得する
-                TwoLineListItem two = (TwoLineListItem)view;
+                    // 選択されたビューを取得 TwoLineListItemを取得した後、text2の値を取得する
+                    TwoLineListItem two = (TwoLineListItem) view;
 //                TextView idTextView = (TextView)two.findViewById(android.R.id.text2);
-                TextView idTextView = (TextView)two.getText2();
-                String idStr = (String) idTextView.getText();
-                // 値を引き渡す (識別名, 値)の順番で指定します
-                intent.putExtra("id", idStr);
-                // Activity起動
-                startActivity(intent);
+                    TextView idTextView = (TextView) two.getText2();
+                    String idStr = (String) idTextView.getText();
+                    // 値を引き渡す (識別名, 値)の順番で指定します
+                    intent.putExtra("id", idStr);
+                    // Activity起動
+                    startActivity(intent);
+                }else {
+                    Intent intent = new Intent(ListActivity.this, com.example.yuguchi.simplememo.ListActivity.class);
+                    startActivity(intent);
+                }
             }
         });
 
