@@ -42,7 +42,6 @@ public class CustomDialogFlagment extends DialogFragment {
                     if(helper == null) {
                         helper = new MemoOpenHelper(getActivity());
                     }
-
                     //データベースに保存
                     SQLiteDatabase db = helper.getWritableDatabase();
                     try {

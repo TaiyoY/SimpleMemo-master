@@ -10,6 +10,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import java.util.UUID;
 
+
+
 public class CreateMemoActivity extends AppCompatActivity {
 
         // MemoOpenHelperクラスを定義
@@ -85,7 +87,20 @@ public class CreateMemoActivity extends AppCompatActivity {
                             // 新しくuuidを発行する
                             id = UUID.randomUUID().toString();
                             // INSERT
-                            db.execSQL("insert into MEMO_TABLE(uuid, body, parentId, isFolder) VALUES('"+ id +"', '"+ bodyStr +"', '"+ id +"', '"+ 0 +"')");
+                            db.execSQL("insert into MEMO_TABLE(uuid, body, parentId, isFolder) VALUES('"+ id +"', '"+ bodyStr +"', '"+ 0 +"', '"+ 0 +"')");
+                            // rawQueryというSELECT専用メソッドを使用してデータを取得する
+                            Cursor c = db.rawQuery("select id from MEMO_TABLE where uuid = '"+ id +"'", null);
+                            // Cursorの先頭行があるかどうか確認
+                            boolean next = c.moveToFirst();
+                            // 取得した全ての行を取得
+                            while (next) {
+                                // 取得したカラムの順番(0から始まる)と型を指定してデータを取得する
+                                Integer pid = c.getInt(0);
+                                int pID = pid;
+                                db.execSQL("update MEMO_TABLE set parentId ="' pID'"  ");
+                                next = c.moveToNext();
+                            }
+
                         }else{
                             // UPDATE
                             db.execSQL("update MEMO_TABLE set body = '"+ bodyStr +"' where uuid = '"+id+"'");

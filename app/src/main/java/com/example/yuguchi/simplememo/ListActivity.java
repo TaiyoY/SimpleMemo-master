@@ -48,6 +48,7 @@ public class ListActivity extends AppCompatActivity {
                 String body = c.getString(1);
                 String parentID = String.valueOf(c.getInt(2));
                 String isFolder = String.valueOf(c.getInt(3));
+                String id = String.valueOf(c.getInt(4));
                 if(body.length() > 10){
                     // リストに表示するのは10文字まで
                     body = body.substring(0, 11) + "...";
@@ -58,6 +59,7 @@ public class ListActivity extends AppCompatActivity {
                 data.put("parentID", parentID);
                 data.put("isFolder", isFolder);
                 memoList.add(data);
+                int ID = Integer.valueOf(id);
                 // 次の行が存在するか確認
                 next = c.moveToNext();
             }
