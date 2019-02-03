@@ -34,6 +34,7 @@ public class CreateMemoActivity extends AppCompatActivity {
             Intent intent = this.getIntent();
             // 値を取得
             id = intent.getStringExtra("id");
+
             // 画面に表示
             if(id.equals("")){
                 // 新規作成の場合
@@ -81,12 +82,10 @@ public class CreateMemoActivity extends AppCompatActivity {
                     try {
                         if(newFlag){
                             // 新規作成の場合
-                            //pID取得
-                            int ID = Integer.parseInt(id);
                             // 新しくuuidを発行する
                             id = UUID.randomUUID().toString();
                             // INSERT
-                            db.execSQL("insert into MEMO_TABLE(uuid, body, parentId, isFolder) VALUES('"+ id +"', '"+ bodyStr +"', '"+ ID +"', '"+ 0 +"')");
+                            db.execSQL("insert into MEMO_TABLE(uuid, body, parentId, isFolder) VALUES('"+ id +"', '"+ bodyStr +"', '"+ id +"', '"+ 0 +"')");
                         }else{
                             // UPDATE
                             db.execSQL("update MEMO_TABLE set body = '"+ bodyStr +"' where uuid = '"+id+"'");

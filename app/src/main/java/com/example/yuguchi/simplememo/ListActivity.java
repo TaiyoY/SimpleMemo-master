@@ -71,7 +71,7 @@ public class ListActivity extends AppCompatActivity {
         final SimpleAdapter simpleAdapter = new SimpleAdapter(this,
                 memoList, // 使用するデータ
                 R.layout.custom_list_layout, // 使用するレイアウト
-                new String[]{"body","id","parentId","isFolder"}, // どの項目を
+                new String[]{"body","id","parentID","isFolder"}, // どの項目を
                 new int[]{R.id.mainText, R.id.subText, R.id.pID, R.id.isF} // どのidの項目に入れるか
         );
 
@@ -95,7 +95,6 @@ public class ListActivity extends AppCompatActivity {
 
                     // 選択されたビューを取得 TwoLineListItemを取得した後、text2の値を取得する
                     TwoLineListItem two = (TwoLineListItem) view;
-//                TextView idTextView = (TextView)two.findViewById(android.R.id.text2);
                     TextView idTextView = (TextView) two.getText2();
                     String idStr = (String) idTextView.getText();
                     // 値を引き渡す (識別名, 値)の順番で指定します

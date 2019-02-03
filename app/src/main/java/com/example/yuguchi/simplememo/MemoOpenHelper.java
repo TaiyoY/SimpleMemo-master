@@ -10,7 +10,7 @@ public class MemoOpenHelper extends SQLiteOpenHelper {
     // データベース名
     static final private String DBName = "MEMO_DB";
     // データベースのバージョン(2,3と挙げていくとonUpgradeメソッドが実行される)
-    static final private int VERSION = 3;
+    static final private int VERSION = 4;
 
     // コンストラクタ　以下のように呼ぶこと
     public MemoOpenHelper(Context context) {
